@@ -29,13 +29,23 @@ const App = () => {
 
   const addExpenseHandler = (expense) => {
     console.log("check app.js",expense);
-    setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
+    
+    setExpenses((prevExpenses) => { 
+      return [...prevExpenses, expense];
     });
     console.log("In App.js");
     console.log("Expenses "+ JSON.stringify(expense));
     
-    //DUMMY_EXPENSES.push(expense);
+    //findings on the error: it does not work(does not display correct title only, date & price is correct) 
+    //when replace/put new data to the 1st position in array but works if i put data on the last/new position in array
+    //potential problem: 
+    //   react uses shallow comparison which makes it ignore the new title change 
+    //   although in console it prints the new data/array inserted
+    //DUMMY_EXPENSES.unshift(expense); 
+     //doesn't work properly, if i save code with new code then the data updates but by default it won't update
+    //  setExpenses((prevExpenses) => { 
+    //   return [expense, ...prevExpenses];
+    // });
   };
 
 
